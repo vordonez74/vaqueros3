@@ -7,9 +7,7 @@
 
 
 
-char dato[]={'0','|','0','|','0','|','0','|','0','|','0','|','0','\0'};
-int bom1;
-
+char dato[]={'0','0','0','0','0','0','0'};
 char orden[10];
 
 void main() {
@@ -32,12 +30,21 @@ void main() {
 
  while(1)
  {
-#line 79 "C:/Users/ale/Documents/vaqueros3/vaqueros3.c"
+
+
+
+
+ if( PORTA.B0 ){dato[0] = '1';}else{dato[0] = '0';}
+ if( PORTA.B1 ){dato[1] = '1';}else{dato[1] = '0';}
+ if( PORTA.B2 ){dato[2] = '1';}else{dato[2] = '0';}
+ if( PORTA.B3 ){dato[3] = '1';}else{dato[3] = '0';}
+ if( PORTA.B4 ){dato[4] = '1';}else{dato[4] = '0';}
+ if( PORTA.B6 ){dato[5] = '1';}else{dato[5] = '0';}
+ if( PORTA.B7 ){dato[6] = '1';}else{dato[6] = '0';}
+#line 64 "C:/Users/ale/Documents/vaqueros3/vaqueros3.c"
  if (UART1_Data_Ready()==1)
  {
-
  UART1_Read_Text(orden,"_",10);
-
 
 
  if(strcmp(orden,"A") == 0){
@@ -53,14 +60,8 @@ void main() {
  if(strcmp(orden,"D") == 0){
   PORTA.B1  = 0;
  }
- UART1_Write_Text(orden);
- Delay_ms(1000);
- if( PORTA.B0  == 1){
- UART1_Write_Text("1");
- }else{
- UART1_Write_Text("0");
- }
  }
  Delay_ms(1000);
+ UART1_Write_Text(dato);
  }
 }
