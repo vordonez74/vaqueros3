@@ -20,8 +20,8 @@ void main() {
  UART1_Init(9600);
  Delay_ms(100);
 
-  PORTA.B0  = 0;
-  PORTA.B1  = 0;
+  PORTA.B0  = 1;
+  PORTA.B1  = 1;
   PORTA.B2  = 1;
   PORTA.B3  = 1;
   PORTA.B4  = 1;
@@ -41,40 +41,24 @@ void main() {
  if( PORTA.B4 ){dato[8] = '1';}else{dato[8] = '0';}
  if( PORTA.B6 ){dato[10] = '1';}else{dato[10] = '0';}
  if( PORTA.B7 ){dato[12] = '1';}else{dato[12] = '0';}
-
-
-
- if( PORTA.B6  == 1 &&  PORTA.B3  == 0)
- {
-  PORTA.B1  = 1;
- }
- if( PORTA.B7  == 0 ||  PORTA.B3  == 1)
- {
-  PORTA.B1  = 0;
- }
- if( PORTA.B2  == 0 &&  PORTA.B3  == 1)
- {
-  PORTA.B0  = 1;
- }
- if( PORTA.B4  == 0 ||  PORTA.B2  == 1)
- {
-  PORTA.B0  = 0;
- }
+#line 63 "C:/Users/ale/Documents/vaqueros3/vaqueros3.c"
  if (UART1_Data_Ready()==1)
  {
  UART1_Read_Text(orden,"_",10);
 
- if(strcmp(orden,"A") == 0 &&  PORTA.B4  == 1){
-  PORTA.B0  = 1;
- }
- if(strcmp(orden,"B") == 0){
+
+ if(strcmp(orden,"A") == 0){
   PORTA.B0  = 0;
  }
- if(strcmp(orden,"C") == 0 &&  PORTA.B7  == 1){
-  PORTA.B1  = 1;
+ if(strcmp(orden,"B") == 0){
+  PORTA.B0  = 1;
+ }
+
+ if(strcmp(orden,"C") == 0){
+  PORTA.B1  = 0;
  }
  if(strcmp(orden,"D") == 0){
-  PORTA.B1  = 0;
+  PORTA.B1  = 1;
  }
  }
  Delay_ms(3000);

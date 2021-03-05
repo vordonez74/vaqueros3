@@ -29,10 +29,10 @@ L_main0:
 	GOTO       L_main0
 	NOP
 	NOP
-;vaqueros3.c,22 :: 		BOMBA1 = 0;
-	BCF        PORTA+0, 0
-;vaqueros3.c,23 :: 		BOMBA2 = 0;
-	BCF        PORTA+0, 1
+;vaqueros3.c,22 :: 		BOMBA1 = 1;
+	BSF        PORTA+0, 0
+;vaqueros3.c,23 :: 		BOMBA2 = 1;
+	BSF        PORTA+0, 1
 ;vaqueros3.c,24 :: 		SENSOR1 = 1;
 	BSF        PORTA+0, 2
 ;vaqueros3.c,25 :: 		SENSOR3 = 1;
@@ -115,55 +115,13 @@ L_main15:
 	MOVLW      48
 	MOVWF      _dato+12
 L_main16:
-;vaqueros3.c,46 :: 		if(SENSOR5 == 1 && SENSOR3 == 0)
-	BTFSS      PORTA+0, 6
-	GOTO       L_main19
-	BTFSC      PORTA+0, 3
-	GOTO       L_main19
-L__main44:
-;vaqueros3.c,48 :: 		BOMBA2 = 1;
-	BSF        PORTA+0, 1
-;vaqueros3.c,49 :: 		}
-L_main19:
-;vaqueros3.c,50 :: 		if(SENSOR6 == 0 || SENSOR3 == 1)
-	BTFSS      PORTA+0, 7
-	GOTO       L__main43
-	BTFSC      PORTA+0, 3
-	GOTO       L__main43
-	GOTO       L_main22
-L__main43:
-;vaqueros3.c,52 :: 		BOMBA2 = 0;
-	BCF        PORTA+0, 1
-;vaqueros3.c,53 :: 		}
-L_main22:
-;vaqueros3.c,54 :: 		if(SENSOR1 == 0 && SENSOR3 == 1)
-	BTFSC      PORTA+0, 2
-	GOTO       L_main25
-	BTFSS      PORTA+0, 3
-	GOTO       L_main25
-L__main42:
-;vaqueros3.c,56 :: 		BOMBA1 = 1;
-	BSF        PORTA+0, 0
-;vaqueros3.c,57 :: 		}
-L_main25:
-;vaqueros3.c,58 :: 		if(SENSOR4 == 0 || SENSOR1 == 1)
-	BTFSS      PORTA+0, 4
-	GOTO       L__main41
-	BTFSC      PORTA+0, 2
-	GOTO       L__main41
-	GOTO       L_main28
-L__main41:
-;vaqueros3.c,60 :: 		BOMBA1 = 0;
-	BCF        PORTA+0, 0
-;vaqueros3.c,61 :: 		}
-L_main28:
-;vaqueros3.c,62 :: 		if (UART1_Data_Ready()==1)
+;vaqueros3.c,63 :: 		if (UART1_Data_Ready()==1)
 	CALL       _UART1_Data_Ready+0
 	MOVF       R0+0, 0
 	XORLW      1
 	BTFSS      STATUS+0, 2
-	GOTO       L_main29
-;vaqueros3.c,64 :: 		UART1_Read_Text(orden,"_",10); //void UARTx_Read_Text(char *Output, char *Delimiter, char Attempts);
+	GOTO       L_main17
+;vaqueros3.c,65 :: 		UART1_Read_Text(orden,"_",10); //void UARTx_Read_Text(char *Output, char *Delimiter, char Attempts);
 	MOVLW      _orden+0
 	MOVWF      FARG_UART1_Read_Text_Output+0
 	MOVLW      ?lstr1_vaqueros3+0
@@ -171,7 +129,7 @@ L_main28:
 	MOVLW      10
 	MOVWF      FARG_UART1_Read_Text_Attempts+0
 	CALL       _UART1_Read_Text+0
-;vaqueros3.c,66 :: 		if(strcmp(orden,"A") == 0 && SENSOR4 == 1){   //char strcmp(char *s1, char *s2);
+;vaqueros3.c,68 :: 		if(strcmp(orden,"A") == 0){
 	MOVLW      _orden+0
 	MOVWF      FARG_strcmp_s1+0
 	MOVLW      ?lstr2_vaqueros3+0
@@ -180,20 +138,17 @@ L_main28:
 	MOVLW      0
 	XORWF      R0+1, 0
 	BTFSS      STATUS+0, 2
-	GOTO       L__main46
+	GOTO       L__main24
 	MOVLW      0
 	XORWF      R0+0, 0
-L__main46:
+L__main24:
 	BTFSS      STATUS+0, 2
-	GOTO       L_main32
-	BTFSS      PORTA+0, 4
-	GOTO       L_main32
-L__main40:
-;vaqueros3.c,67 :: 		BOMBA1 = 1;
-	BSF        PORTA+0, 0
-;vaqueros3.c,68 :: 		}
-L_main32:
-;vaqueros3.c,69 :: 		if(strcmp(orden,"B") == 0){
+	GOTO       L_main18
+;vaqueros3.c,69 :: 		BOMBA1 = 0;
+	BCF        PORTA+0, 0
+;vaqueros3.c,70 :: 		}
+L_main18:
+;vaqueros3.c,71 :: 		if(strcmp(orden,"B") == 0){
 	MOVLW      _orden+0
 	MOVWF      FARG_strcmp_s1+0
 	MOVLW      ?lstr3_vaqueros3+0
@@ -202,17 +157,17 @@ L_main32:
 	MOVLW      0
 	XORWF      R0+1, 0
 	BTFSS      STATUS+0, 2
-	GOTO       L__main47
+	GOTO       L__main25
 	MOVLW      0
 	XORWF      R0+0, 0
-L__main47:
+L__main25:
 	BTFSS      STATUS+0, 2
-	GOTO       L_main33
-;vaqueros3.c,70 :: 		BOMBA1 = 0;
-	BCF        PORTA+0, 0
-;vaqueros3.c,71 :: 		}
-L_main33:
-;vaqueros3.c,72 :: 		if(strcmp(orden,"C") == 0 && SENSOR6 == 1){
+	GOTO       L_main19
+;vaqueros3.c,72 :: 		BOMBA1 = 1;
+	BSF        PORTA+0, 0
+;vaqueros3.c,73 :: 		}
+L_main19:
+;vaqueros3.c,75 :: 		if(strcmp(orden,"C") == 0){
 	MOVLW      _orden+0
 	MOVWF      FARG_strcmp_s1+0
 	MOVLW      ?lstr4_vaqueros3+0
@@ -221,20 +176,17 @@ L_main33:
 	MOVLW      0
 	XORWF      R0+1, 0
 	BTFSS      STATUS+0, 2
-	GOTO       L__main48
+	GOTO       L__main26
 	MOVLW      0
 	XORWF      R0+0, 0
-L__main48:
+L__main26:
 	BTFSS      STATUS+0, 2
-	GOTO       L_main36
-	BTFSS      PORTA+0, 7
-	GOTO       L_main36
-L__main39:
-;vaqueros3.c,73 :: 		BOMBA2 = 1;
-	BSF        PORTA+0, 1
-;vaqueros3.c,74 :: 		}
-L_main36:
-;vaqueros3.c,75 :: 		if(strcmp(orden,"D") == 0){
+	GOTO       L_main20
+;vaqueros3.c,76 :: 		BOMBA2 = 0;
+	BCF        PORTA+0, 1
+;vaqueros3.c,77 :: 		}
+L_main20:
+;vaqueros3.c,78 :: 		if(strcmp(orden,"D") == 0){
 	MOVLW      _orden+0
 	MOVWF      FARG_strcmp_s1+0
 	MOVLW      ?lstr5_vaqueros3+0
@@ -243,41 +195,41 @@ L_main36:
 	MOVLW      0
 	XORWF      R0+1, 0
 	BTFSS      STATUS+0, 2
-	GOTO       L__main49
+	GOTO       L__main27
 	MOVLW      0
 	XORWF      R0+0, 0
-L__main49:
+L__main27:
 	BTFSS      STATUS+0, 2
-	GOTO       L_main37
-;vaqueros3.c,76 :: 		BOMBA2 = 0;
-	BCF        PORTA+0, 1
-;vaqueros3.c,77 :: 		}
-L_main37:
-;vaqueros3.c,78 :: 		}
-L_main29:
-;vaqueros3.c,79 :: 		Delay_ms(3000);
+	GOTO       L_main21
+;vaqueros3.c,79 :: 		BOMBA2 = 1;
+	BSF        PORTA+0, 1
+;vaqueros3.c,80 :: 		}
+L_main21:
+;vaqueros3.c,81 :: 		}
+L_main17:
+;vaqueros3.c,82 :: 		Delay_ms(3000);
 	MOVLW      16
 	MOVWF      R11+0
 	MOVLW      57
 	MOVWF      R12+0
 	MOVLW      13
 	MOVWF      R13+0
-L_main38:
+L_main22:
 	DECFSZ     R13+0, 1
-	GOTO       L_main38
+	GOTO       L_main22
 	DECFSZ     R12+0, 1
-	GOTO       L_main38
+	GOTO       L_main22
 	DECFSZ     R11+0, 1
-	GOTO       L_main38
+	GOTO       L_main22
 	NOP
 	NOP
-;vaqueros3.c,80 :: 		UART1_Write_Text(dato);
+;vaqueros3.c,83 :: 		UART1_Write_Text(dato);
 	MOVLW      _dato+0
 	MOVWF      FARG_UART1_Write_Text_uart_text+0
 	CALL       _UART1_Write_Text+0
-;vaqueros3.c,81 :: 		}
+;vaqueros3.c,84 :: 		}
 	GOTO       L_main1
-;vaqueros3.c,82 :: 		}
+;vaqueros3.c,85 :: 		}
 L_end_main:
 	GOTO       $+0
 ; end of _main

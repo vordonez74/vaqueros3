@@ -19,8 +19,8 @@ void main() {
     UART1_Init(9600);
     Delay_ms(100);
 
-    BOMBA1 = 0;
-    BOMBA2 = 0;
+    BOMBA1 = 1;
+    BOMBA2 = 1;
     SENSOR1 = 1;
     SENSOR3 = 1;
     SENSOR4 = 1;
@@ -42,38 +42,41 @@ void main() {
         if(SENSOR6){dato[12] = '1';}else{dato[12] = '0';}
 
         //los sensores se activan con un 0
-
+        /*
         if(SENSOR5 == 1 && SENSOR3 == 0)
-        {
-            BOMBA2 = 1;
-        }
-        if(SENSOR6 == 0 || SENSOR3 == 1)
         {
             BOMBA2 = 0;
         }
-        if(SENSOR1 == 0 && SENSOR3 == 1)
+        if(SENSOR6 == 0 || SENSOR3 == 1)
         {
-            BOMBA1 = 1;
+            BOMBA2 = 1;
         }
-        if(SENSOR4 == 0 || SENSOR1 == 1)
+        if(SENSOR1 == 0 && SENSOR3 == 1)
         {
             BOMBA1 = 0;
         }
+        if(SENSOR4 == 0 || SENSOR1 == 1)
+        {
+            BOMBA1 = 1;
+        }
+        */
         if (UART1_Data_Ready()==1)
         {
             UART1_Read_Text(orden,"_",10); //void UARTx_Read_Text(char *Output, char *Delimiter, char Attempts);
 
-            if(strcmp(orden,"A") == 0 && SENSOR4 == 1){   //char strcmp(char *s1, char *s2);
-                BOMBA1 = 1;
-            }
-            if(strcmp(orden,"B") == 0){
+            //if(strcmp(orden,"A") == 0 && SENSOR4 == 1){   //char strcmp(char *s1, char *s2);
+            if(strcmp(orden,"A") == 0){
                 BOMBA1 = 0;
             }
-            if(strcmp(orden,"C") == 0 && SENSOR6 == 1){
-                BOMBA2 = 1;
+            if(strcmp(orden,"B") == 0){
+                BOMBA1 = 1;
+            }
+            //if(strcmp(orden,"C") == 0 && SENSOR6 == 1){
+            if(strcmp(orden,"C") == 0){
+                BOMBA2 = 0;
             }
             if(strcmp(orden,"D") == 0){
-                BOMBA2 = 0;
+                BOMBA2 = 1;
             }
         }
         Delay_ms(3000);
