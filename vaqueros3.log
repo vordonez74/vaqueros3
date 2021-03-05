@@ -1,0 +1,12 @@
+0	1	mikroCPIC1618.exe -MSF -DBG -pP16F628A -DL -O11111114 -fo4 -N"C:\Users\ale\Documents\vaqueros3\vaqueros3.mcppi" -SP"C:\Users\Public\Documents\Mikroelektronika\mikroC PRO for PIC\Defs\" -SP"C:\Users\Public\Documents\Mikroelektronika\mikroC PRO for PIC\Uses\P16\" -SP"C:\Users\ale\Documents\vaqueros3\" -IP"C:\Users\Public\Documents\Mikroelektronika\mikroC PRO for PIC\Uses\P16\" -IP"C:\Users\ale\Documents\vaqueros3\" "vaqueros3.c" "__Lib_Math.mcl" "__Lib_MathDouble.mcl" "__Lib_System.mcl" "__Lib_Delays.mcl" "__Lib_CString.mcl" "__Lib_Conversions.mcl" "__Lib_UART_b21.mcl"	 
+hint: 0	1139	Available RAM: 208 [bytes], Available ROM: 2048 [bytes]	 
+diagnostics: 0	122	Compilation Started	vaqueros3.c
+warning: 21	1509	Generated baud rate is 9615 bps (error = 0.16 percent)	vaqueros3.c
+diagnostics: 109	123	Compiled Successfully	vaqueros3.c
+diagnostics: 0	127	All files Compiled in 172 ms	 
+hint: 0	1144	Used RAM (bytes): 33 (16%)  Free RAM (bytes): 175 (84%)	Used RAM (bytes): 33 (16%)  Free RAM (bytes): 175 (84%)
+hint: 0	1144	Used ROM (program words): 347 (17%)  Free ROM (program words): 1701 (83%)	Used ROM (program words): 347 (17%)  Free ROM (program words): 1701 (83%)
+diagnostics: 0	125	Project Linked Successfully	vaqueros3.mcppi
+diagnostics: 0	128	Linked in 94 ms	 
+diagnostics: 0	129	Project 'vaqueros3.mcppi' completed: 297 ms	 
+diagnostics: 0	103	Finished successfully: 04 mar. 2021, 17:43:59	vaqueros3.mcppi
